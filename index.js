@@ -22,7 +22,7 @@ app.post('/geoeventlogger', function (request, response) {
     console.log('results = ', this.results.street);
 
     this.testResults = JSON.stringify(this.results);
-    console.log('test results = ', this.testResults.street);
+    console.log('test results = ', this.testResults);
 
     let srPostBody = {
         callerFirstName: "Waze",

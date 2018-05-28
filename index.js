@@ -43,7 +43,8 @@ app.post('/geoeventlogger', function (req, res) {
         prettyPrint: true,
         colorize: true,
         silent: false,
-        timestamp: false
+        timestamp: false,
+        format: winston.format.json()
     });
 
     logger.add(winston.transports.File, {
@@ -55,7 +56,8 @@ app.post('/geoeventlogger', function (req, res) {
         filename: 'chf.log',
         maxsize: 40000,
         maxFiles: 10,
-        json: false
+        json: false,
+        format: winston.format.json(),
     });
 
     logger.log('info', 'Hello distributed log files!');

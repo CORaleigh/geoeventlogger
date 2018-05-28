@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.post('/geoeventlogger', function (req, res) {
 
-    var logger = new(winston.Logger)({
+    const logger = winston.createLogger({
         levels: {
             trace: 0,
             input: 1,

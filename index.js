@@ -24,10 +24,10 @@ app.post('/geoeventlogger', function (req, res) {
     // console.log('req.query.data = ', req.query.data);
     // console.log('req.params.data = ', req.params.data);
 
-    var output = JSON.stringify(request.body);
+    var output = JSON.stringify(req.body);
     winston.log('info', output);
 
-    res.send(request.body); // echo the result back
+    // res.send(request.body); // echo the result back
 });
 console.log('listening on 3001');
 app.listen(3001);

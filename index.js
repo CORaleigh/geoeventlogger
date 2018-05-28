@@ -16,42 +16,26 @@ app.post('/geoeventlogger', function (req, res) {
         format: winston.format.json(),
         prettyPrint: true,
         transports: [
-          //
-          // - Write to all logs with level `info` and below to `combined.log` 
-          // - Write all logs error (and below) to `error.log`.
-          //
-          new winston.transports.File({ filename: 'error.log', level: 'error' }),
-          new winston.transports.File({ filename: 'combined.log' })
+            //
+            // - Write to all logs with level `info` and below to `combined.log` 
+            // - Write all logs error (and below) to `error.log`.
+            //
+            new winston.transports.File({
+                filename: 'error.log',
+                level: 'error'
+            }),
+            new winston.transports.File({
+                filename: 'combined.log'
+            })
         ]
-      });
-      
-    // logger.add(winston.transports.Console, {
-    //     level: 'info',
-    //     prettyPrint: true,
-    //     colorize: true,
-    //     silent: false,
-    //     timestamp: false,
-    //     format: winston.format.json()
-    // });
+    });
 
-    // logger.add(winston.transports.File, {
-    //     prettyPrint: true,
-    //     level: 'info',
-    //     silent: false,
-    //     colorize: true,
-    //     timestamp: true,
-    //     filename: 'chf.log',
-    //     maxsize: 40000,
-    //     maxFiles: 10,
-    //     json: false,
-    //     format: winston.format.json(),
-    // });
-
+    if (process.env.NODE_ENV !== 'production') {
+        logger.add(new winston.transports.Console({
+            format: winston.format.simple()
+        }));
+    }
     logger.log('info', 'Hello distributed log files!');
-
-    // .log('req.body = ', req.body); // your JSON
-    // console.log('req.query.data = ', req.query.data);
-    // console.log('req.params.data = ', req.params.data);
 
     var output = JSON.stringify(req.body);
     logger.log('info', req.body);

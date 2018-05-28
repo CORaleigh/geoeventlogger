@@ -24,27 +24,27 @@ app.post('/geoeventlogger', function (req, res) {
         ]
       });
       
-    logger.add(winston.transports.Console, {
-        level: 'info',
-        prettyPrint: true,
-        colorize: true,
-        silent: false,
-        timestamp: false,
-        format: winston.format.json()
-    });
+    // logger.add(winston.transports.Console, {
+    //     level: 'info',
+    //     prettyPrint: true,
+    //     colorize: true,
+    //     silent: false,
+    //     timestamp: false,
+    //     format: winston.format.json()
+    // });
 
-    logger.add(winston.transports.File, {
-        prettyPrint: true,
-        level: 'info',
-        silent: false,
-        colorize: true,
-        timestamp: true,
-        filename: 'chf.log',
-        maxsize: 40000,
-        maxFiles: 10,
-        json: false,
-        format: winston.format.json(),
-    });
+    // logger.add(winston.transports.File, {
+    //     prettyPrint: true,
+    //     level: 'info',
+    //     silent: false,
+    //     colorize: true,
+    //     timestamp: true,
+    //     filename: 'chf.log',
+    //     maxsize: 40000,
+    //     maxFiles: 10,
+    //     json: false,
+    //     format: winston.format.json(),
+    // });
 
     logger.log('info', 'Hello distributed log files!');
 

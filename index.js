@@ -14,6 +14,7 @@ app.post('/geoeventlogger', function (req, res) {
     const logger = winston.createLogger({
         level: 'info',
         format: winston.format.json(),
+        prettyPrint: true,
         transports: [
           //
           // - Write to all logs with level `info` and below to `combined.log` 

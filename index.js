@@ -10,22 +10,62 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post('/geoeventlogger', function (req, res) {
-    winston.configure({
-        transports: [
-            new(winston.transports.File)({
-                filename: 'somefile.log'
-            })
-        ]
+
+    var logger = new(winston.Logger)({
+        levels: {
+            trace: 0,
+            input: 1,
+            verbose: 2,
+            prompt: 3,
+            debug: 4,
+            info: 5,
+            data: 6,
+            help: 7,
+            warn: 8,
+            error: 9
+        },
+        colors: {
+            trace: 'magenta',
+            input: 'grey',
+            verbose: 'cyan',
+            prompt: 'grey',
+            debug: 'blue',
+            info: 'green',
+            data: 'grey',
+            help: 'cyan',
+            warn: 'yellow',
+            error: 'red'
+        }
     });
 
-    winston.log('info', 'Hello distributed log files!');
+    logger.add(winston.transports.Console, {
+        level: 'info',
+        prettyPrint: true,
+        colorize: true,
+        silent: false,
+        timestamp: false
+    });
 
-    console.log('req.body = ', req.body); // your JSON
+    logger.add(winston.transports.File, {
+        prettyPrint: true,
+        level: 'info',
+        silent: false,
+        colorize: true,
+        timestamp: true,
+        filename: 'chf.log',
+        maxsize: 40000,
+        maxFiles: 10,
+        json: false
+    });
+
+    logger.log('info', 'Hello distributed log files!');
+
+    // .log('req.body = ', req.body); // your JSON
     // console.log('req.query.data = ', req.query.data);
     // console.log('req.params.data = ', req.params.data);
 
     var output = JSON.stringify(req.body);
-    winston.log('info', output);
+    logger.log('info', req.body);
 
     // res.send(request.body); // echo the result back
 });

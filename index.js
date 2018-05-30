@@ -39,8 +39,7 @@ app.get('/fakewazedata', function (req, res) {
             spatialReference: {
                 wkid: 4326
             }
-        },
-        GeoTags: null
+        }
     };
 
     res.send(JSON.stringify(wazedata));

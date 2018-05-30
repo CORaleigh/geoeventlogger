@@ -9,6 +9,43 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
+// GET method route
+app.get('/fakewazedata', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    const wazedata = {
+        country: 'US',
+        imageId: null,
+        city: 'Raleigh, NC',
+        reportRating: 2,
+        confidence: 0,
+        reliability: 6,
+        reportDescription: null,
+        type: 'WEATHERHAZARD',
+        uuid: '57db1b12-7623-3a93-a059-bb8b5b0fc969',
+        roadType: 3,
+        magvar: 102,
+        subtype: 'HAZARD_ON_SHOULDER_CAR_STOPPED',
+        street: 'I-540 E',
+        imageUrl: null,
+        location: {
+            x: -78.746812,
+            y: 35.909272
+        },
+        pubMillis: 1527207191537,
+        geometry: {
+            x: -78.746812,
+            y: 35.909272,
+            spatialReference: {
+                wkid: 4326
+            }
+        },
+        GeoTags: null
+    };
+
+    res.send(JSON.stringify(wazedata));
+})
+
 app.post('/geoeventlogger', function (req, res) {
 
     const logger = winston.createLogger({

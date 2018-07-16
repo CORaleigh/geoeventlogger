@@ -23,7 +23,8 @@ app.get('/birds', function (req, res) {
             "authorization": "Bird eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjA4YzA3OGUxLTBhODEtNDcxYS1iZDAyLWM5Mzc0YWVmNzExMSIsImRldmljZV9pZCI6IjQ1NTdkMDJjLWU3NmItNDc2Yi05NjNlLTdmYTc1ZTAwOTA0MCIsImV4cCI6MTU2MzI5NjExM30.94tVSKTQsVyX5kMwsQ9E-56cPAjvzTkZSZ-baGo1MAM",
             "device-id": "20c6a680-6194-41e8-bedd-7e421cb61cd4",
             "app-version": "3.0.5",
-            "location": "{\\\"latitude\\\":35.787743,\\\"longitude\\\":-78.644257,\\\"altitude\\\":315,\\\"accuracy\\\":100,\\\"speed\\\":-1,\\\"heading\\\":-1}",
+            // "location": "{\\\"latitude\\\":35.787743,\\\"longitude\\\":-78.644257,\\\"altitude\\\":315,\\\"accuracy\\\":100,\\\"speed\\\":-1,\\\"heading\\\":-1}",
+            "Location": {"latitude":35.787743,"longitude":-78.644257,"altitude":315,"accuracy":100,"speed":-1,"heading":-1},
             "cache-control": "no-cache",
             // "postman-token": "285a22d2-b2c8-8b5e-e002-1f2ad89dc488"
         }

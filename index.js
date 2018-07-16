@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.get('/birds', function (req, res) {
 
     console.log('inside birds');
+    var payload;
 
     var options = {
         "method": "GET",
@@ -40,7 +41,8 @@ app.get('/birds', function (req, res) {
         res.on("end", function () {
             var body = Buffer.concat(chunks);
             console.log(body.toString());
-            res.send(body.toString());
+            payload = body.toString();
+            req.write(payload);
         });
     });
 

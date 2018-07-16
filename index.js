@@ -24,7 +24,7 @@ app.get('/birds', function (req, response) {
             "device-id": "20c6a680-6194-41e8-bedd-7e421cb61cd4",
             "app-version": "3.0.5",
             // "location": "{\\\"latitude\\\":35.787743,\\\"longitude\\\":-78.644257,\\\"altitude\\\":315,\\\"accuracy\\\":100,\\\"speed\\\":-1,\\\"heading\\\":-1}",
-            "Location": '{"latitude":35.787743,"longitude":-78.644257,"altitude":315,"accuracy":100,"speed":-1,"heading":-1}',
+            "Location": '{"latitude":35.787743,"longitude":-78.644257,"altitude":315,"accuracy":100,"heading":-1}',
             "cache-control": "no-cache",
             // "postman-token": "285a22d2-b2c8-8b5e-e002-1f2ad89dc488"
         }

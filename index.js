@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.get('/birds', function (req, res) {
 
     console.log('inside birds');
-    var payload;
+    var body;
 
     var options = {
         "method": "GET",
@@ -39,13 +39,13 @@ app.get('/birds', function (req, res) {
         });
 
         res.on("end", function () {
-            var body = Buffer.concat(chunks);
+            body = Buffer.concat(chunks);
             console.log(body.toString());
-            payload = body.toString();
-            req.write(payload);
+            // payload = body.toString();
+            // req.write(body.toString());
         });
     });
-
+    req.write(body);
     req.end();
 
     // var birdurl = 'https://api.bird.co/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=1000';

@@ -18,7 +18,7 @@ app.get('/birds', function (req, response) {
         "method": "GET",
         "hostname": "api.bird.co",
         "port": null,
-        "path": "/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=1000",
+        "path": "/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=10000",
         "headers": {
             "authorization": "Bird eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjA4YzA3OGUxLTBhODEtNDcxYS1iZDAyLWM5Mzc0YWVmNzExMSIsImRldmljZV9pZCI6IjQ1NTdkMDJjLWU3NmItNDc2Yi05NjNlLTdmYTc1ZTAwOTA0MCIsImV4cCI6MTU2MzI5NjExM30.94tVSKTQsVyX5kMwsQ9E-56cPAjvzTkZSZ-baGo1MAM",
             "device-id": "20c6a680-6194-41e8-bedd-7e421cb61cd4",

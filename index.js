@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const request = require("request-promise");
 const winston = require('winston');
 const app = express();
+var http = require("https");
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 
 app.get('/birds', function (req, res) {
 
-    var http = require("https");
+    console.log('inside birds');
 
     var options = {
         "method": "GET",

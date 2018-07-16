@@ -40,6 +40,7 @@ app.get('/birds', function (req, res) {
         res.on("end", function () {
             var body = Buffer.concat(chunks);
             console.log(body.toString());
+            res.send(body.toString());
         });
     });
 

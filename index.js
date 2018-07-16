@@ -9,6 +9,72 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
+app.get('/birds', function (req, res) {
+
+    var http = require("https");
+
+    var options = {
+        "method": "GET",
+        "hostname": "api.bird.co",
+        "port": null,
+        "path": "/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=1000",
+        "headers": {
+            "authorization": "Bird eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjA4YzA3OGUxLTBhODEtNDcxYS1iZDAyLWM5Mzc0YWVmNzExMSIsImRldmljZV9pZCI6IjQ1NTdkMDJjLWU3NmItNDc2Yi05NjNlLTdmYTc1ZTAwOTA0MCIsImV4cCI6MTU2MzI5NjExM30.94tVSKTQsVyX5kMwsQ9E-56cPAjvzTkZSZ-baGo1MAM",
+            "device-id": "20c6a680-6194-41e8-bedd-7e421cb61cd4",
+            "app-version": "3.0.5",
+            "location": "{\\\"latitude\\\":35.787743,\\\"longitude\\\":-78.644257,\\\"altitude\\\":315,\\\"accuracy\\\":100,\\\"speed\\\":-1,\\\"heading\\\":-1}",
+            "cache-control": "no-cache",
+            // "postman-token": "285a22d2-b2c8-8b5e-e002-1f2ad89dc488"
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var chunks = [];
+
+        res.on("data", function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+            var body = Buffer.concat(chunks);
+            console.log(body.toString());
+        });
+    });
+
+    req.end();
+
+    // var birdurl = 'https://api.bird.co/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=1000';
+
+    // var options = {
+    //     method: 'POST',
+    //     uri: birdurl,
+    //     body: {
+    //         // some: 'payload'
+    //     },
+    //     headers: {
+    //         /* 'content-type': 'application/x-www-form-urlencoded' */ // Is set automatically
+    //         'content-type': 'application/json',
+
+
+    //     }
+    //     json: true // Automatically stringifies the body to JSON
+    // };
+
+    // rp(options)
+    //     .then(function (parsedBody) {
+    //         // POST succeeded...
+    //     })
+    //     .catch(function (err) {
+    //         // POST failed...
+    //     });
+    // //res.setHeader('Content-Type', 'application/json');
+    // res.setHeader('Authorization', 'Bird e0266cca-3265-4abb-8c74-8b2e49f70c96');
+    // res.setHeader('Device-id','20c6a680-6194-41e8-bedd-7e421cb61cd4');
+    // res.setHeader('App-Version', '[{"key":"App-Version","value":"3.0.5","description":""}]');
+    // res.setHeader('Location', '{"latitude":35.787743,"longitude":-78.644257,"altitude":315,"accuracy":100,"speed":-1,"heading":-1}');
+
+
+});
 // GET method route
 app.get('/fakewazedata', function (req, res) {
     res.setHeader('Content-Type', 'application/json');

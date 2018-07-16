@@ -10,10 +10,9 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
-app.get('/birds', function (req, res) {
+app.get('/birds', function (req, response) {
 
     console.log('inside birds');
-    var body;
 
     var options = {
         "method": "GET",
@@ -29,24 +28,26 @@ app.get('/birds', function (req, res) {
             "cache-control": "no-cache",
             // "postman-token": "285a22d2-b2c8-8b5e-e002-1f2ad89dc488"
         }
-    };
+    };        
+    
+    var body;
 
     var req = http.request(options, function (res) {
         var chunks = [];
-
         res.on("data", function (chunk) {
             chunks.push(chunk);
+
         });
 
         res.on("end", function () {
             body = Buffer.concat(chunks);
             console.log(body.toString());
-            // payload = body.toString();
-            // req.write(body.toString());
+            response.end(body);
+
         });
     });
-    req.write(body);
     req.end();
+    
 
     // var birdurl = 'https://api.bird.co/bird/nearby?latitude=35.787743&longitude=-78.644257&radius=1000';
 

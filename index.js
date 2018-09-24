@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require("request-promise");
+const rp = require("request-promise");
 const winston = require('winston');
 const app = express();
 var http = require("https");
+const limeUrl = 'https://web-production.lime.bike/api/rider/v1/views/main?map_center_latitude=35.787743&map_center_longitude=-78.644257&user_latitude=35.787743&user_longitude=-78.644257';
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -116,6 +117,57 @@ app.get('/fakewazedata', function (req, res) {
 
     res.send(JSON.stringify(wazedata));
 })
+
+
+app.get('/limescooters', function (req, response) {
+
+    var options = {
+        "method": "GET",
+        "hostname": "web-production.lime.bike",
+        "port": null,
+        "path": "/api/rider/v1/views/main?map_center_latitude=35.787743&map_center_longitude=-78.644257&user_latitude=35.787743&user_longitude=-78.644257",
+        "headers": {
+          "cookie": "_limebike-web_session=dFRzWFYxUkh1TGNCL0cxb2RTUUVkb1k3blJSRzZhTk9wcmt3dS9tVTQwcjNVendudHpjeXJFUlRONmJxd2R2YTRLNlhOSFVZWjkzbUZPUFFvV0w3aVJTNXhDRHJncU92TWFWZHMvWjFNQ1NVZHM0bnlldHN1bFNyYUYwVUlpWU1JOFlaZ3ppekhCNGxoT3EwMmZkMGlUNXFyS1d3eWhJN0E2aG01WERnUFNGVFg0Z0pTOC9iZ0hGTmNNMjk4T1R4MFIvTFdIaXhneWE0R0NIMnJHSEdvL0Y3SFhWb09vcCtDTWMwNkNYVDNwazFxaDhxcUVYU0FpQTFCOG5ZQUVPQ3NYNWtYek04REZ5dVRyN0xESXNEcFY4V2ErOWJOT2dIcTBmTE5UZ0FNaHJQWjhhd2dyaVlkMWFqMWU5S1gveGpmUEIrSGJuL0FSTVVGd01TZ0lEeWhBd0s0Ym50YXdvWVhLVDdNUlVVMjNNTTROQ05mbG9FUk9MemJGQjA4OXpQRTM0NDJvU2Z2STNxcDVQblNaNWZldz09LS0rWkEvQ1dQL0ticy9nZmhTeW5FSHlRPT0%3D--abfe81b6942719f361d47d7836ed7c64a60e28c8",
+          "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX3Rva2VuIjoiTUg3Q1ZXM0dRSUIyUSIsImxvZ2luX2NvdW50Ijo1fQ.9gFB7mDHq3IKo-aW6WZvTICeXVKwlQ0WGkRNknqd8jE",
+          "cache-control": "no-cache",
+          "postman-token": "d7904ab2-9412-b003-9396-72fd9839c0d4"
+        }
+      };
+      
+      var req = http.request(options, function (res) {
+        var chunks = [];
+      
+        res.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+      
+        res.on("end", function () {
+          var body = Buffer.concat(chunks);
+          console.log(body.toString());
+          console.log('body id = ', body.toString());
+          response.end(body);
+
+        });
+      });
+      
+      req.end();
+
+
+});
+
+async function getLimeData(req, res) {
+    let response;
+    req.setHeader('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX3Rva2VuIjoiTUg3Q1ZXM0dRSUIyUSIsImxvZ2luX2NvdW50Ijo1fQ.9gFB7mDHq3IKo-aW6WZvTICeXVKwlQ0WGkRNknqd8jE');
+    req.setHeader('Cookie', '_limebike-web_session=dFRzWFYxUkh1TGNCL0cxb2RTUUVkb1k3blJSRzZhTk9wcmt3dS9tVTQwcjNVendudHpjeXJFUlRONmJxd2R2YTRLNlhOSFVZWjkzbUZPUFFvV0w3aVJTNXhDRHJncU92TWFWZHMvWjFNQ1NVZHM0bnlldHN1bFNyYUYwVUlpWU1JOFlaZ3ppekhCNGxoT3EwMmZkMGlUNXFyS1d3eWhJN0E2aG01WERnUFNGVFg0Z0pTOC9iZ0hGTmNNMjk4T1R4MFIvTFdIaXhneWE0R0NIMnJHSEdvL0Y3SFhWb09vcCtDTWMwNkNYVDNwazFxaDhxcUVYU0FpQTFCOG5ZQUVPQ3NYNWtYek04REZ5dVRyN0xESXNEcFY4V2ErOWJOT2dIcTBmTE5UZ0FNaHJQWjhhd2dyaVlkMWFqMWU5S1gveGpmUEIrSGJuL0FSTVVGd01TZ0lEeWhBd0s0Ym50YXdvWVhLVDdNUlVVMjNNTTROQ05mbG9FUk9MemJGQjA4OXpQRTM0NDJvU2Z2STNxcDVQblNaNWZldz09LS0rWkEvQ1dQL0ticy9nZmhTeW5FSHlRPT0%3D--abfe81b6942719f361d47d7836ed7c64a60e28c8')
+    try {
+        response = await rp(limeUrl);
+        // res.send(response);
+        return response;
+    } catch(err) {
+        console.log('http error getting lime data', err);
+        return res.status(500).send();
+    }
+}
 
 app.post('/geoeventlogger', function (req, res) {
 
